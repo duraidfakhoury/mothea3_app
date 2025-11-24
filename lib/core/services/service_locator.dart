@@ -7,6 +7,7 @@ import 'package:mothea3_app/modules/auth/domain/repository/auth_repository.dart'
 import 'package:mothea3_app/modules/auth/presentation/blocs/login_bloc/login_bloc.dart';
 import 'package:mothea3_app/modules/auth/presentation/blocs/register_bloc/register_bloc.dart';
 import 'package:mothea3_app/modules/auth/presentation/blocs/splash_bloc/splash_bloc.dart';
+import 'package:mothea3_app/modules/home/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:mothea3_app/modules/radio/data/data_source/radio_data_source.dart';
 import 'package:mothea3_app/modules/radio/data/data_source/radio_data_source_impl.dart';
 import 'package:mothea3_app/modules/radio/data/repository/radio_repository_impl.dart';
@@ -47,6 +48,7 @@ class ServiceLocator {
   sl.registerFactory(() => SplashBloc(auth: sl()));
   sl.registerFactory(() => LoginBloc(sl()));
   sl.registerFactory(() => RegisterBloc(sl()));
+  sl.registerFactory(()=> UserBloc(sl()));
 
   // Radio Blocs 
   sl.registerLazySingleton(() => RadioBaseLevelsBloc(sl()));
@@ -57,8 +59,5 @@ class ServiceLocator {
   sl.registerLazySingleton(() => TelevisionBaseLevelsBloc(sl()));
   sl.registerLazySingleton(() => TelevisionLevelLessonsBloc(sl()));
   sl.registerLazySingleton(() => TelevisionLessonBloc(sl()));
-
-
 }
-
 }

@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:mothea3_app/core/enums/acadimic_status.dart';
 
 class Profile extends Equatable {
   final String userName;
   final String email;
   final String number;
-  final String acadamicStatus;
+  final AcadimicStatus acadamicStatus;
 
   const Profile({
     required this.userName,
@@ -14,8 +15,6 @@ class Profile extends Equatable {
   });
   
   @override
-  // TODO: implement props
   List<Object?> get props => [userName , email , number , acadamicStatus];
-
   
 }

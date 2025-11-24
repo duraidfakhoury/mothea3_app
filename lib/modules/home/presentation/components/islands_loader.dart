@@ -14,6 +14,7 @@ class SubProject {
 }
 
 class Island {
+  final bool locked ; 
   final String id;
   final String name;
   final ui.Image image; 
@@ -22,6 +23,7 @@ class Island {
   final String route;
   final List<SubProject> subs;
   const Island( {
+    required this.locked,
     required this.route,
     required this.id,
     required this.name,
@@ -44,7 +46,8 @@ Future<List<Island>> loadIslands({
   required List<Offset> offsets, 
   double uniformScale = 1.0,
   List<String>? names,
-  List<String>? routes
+  List<String>? routes,
+  bool Function(int index)? isLocked,
 }) async {
   assert(pngAssets.length == offsets.length, 'assets/offsets length mismatch');
   final out = <Island>[];
@@ -67,6 +70,7 @@ Future<List<Island>> loadIslands({
     
 
     out.add(Island(
+      locked: isLocked?.call(i) ?? false, // 🔥 Add locked  
       id: 'island_${i + 1}',
       name: names != null && i < names.length ? names[i] : 'Island ${i + 1}',
       image: img,

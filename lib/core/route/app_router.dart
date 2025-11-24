@@ -9,11 +9,14 @@ import 'package:mothea3_app/modules/home/presentation/routes/contact_us_route.da
 import 'package:mothea3_app/modules/home/presentation/routes/home_route.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/knowledge_base_route.dart';
 import 'package:mothea3_app/modules/radio/presentation/routes/radio_base_levels_route.dart';
+import 'package:mothea3_app/modules/radio/presentation/routes/radio_fields_route.dart';
 import 'package:mothea3_app/modules/radio/presentation/routes/radio_lesson_route.dart';
 import 'package:mothea3_app/modules/radio/presentation/routes/radio_level_lessons_route.dart';
 import 'package:mothea3_app/modules/television/presentation/routes/television_base_levels_route.dart';
+import 'package:mothea3_app/modules/television/presentation/routes/television_fields_route.dart';
 import 'package:mothea3_app/modules/television/presentation/routes/television_lesson_route.dart';
 import 'package:mothea3_app/modules/television/presentation/routes/television_level_lessons_route.dart';
+import 'package:mothea3_app/modules/television/presentation/routes/television_pre_cond_route.dart';
 import 'package:mothea3_app/modules/television/presentation/routes/television_recording_route.dart';
 
 class AppRouter {
@@ -65,6 +68,9 @@ class AppRouter {
       TelevisionLevelLessonsRoute.route,
       TelevisionLessonRoute.route,
       TelevisionRecordingRoute.route,
+      TelevisionPreCondRoute.route,
+      TelevisionFieldsRoute.route,
+      RadioFieldsRoute.route,
       
     ]
     );

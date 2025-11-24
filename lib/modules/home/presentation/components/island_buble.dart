@@ -35,7 +35,7 @@ class IslandBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final txtW = _textWidth(island.name, _bubbleTextStyle);
-    final bubbleW = txtW + _bubbleHPad * 4;
+    final bubbleW = island.locked ? txtW + _bubbleHPad * 5 :txtW + _bubbleHPad * 3.8 ;
     const bubbleH = 30.0;
 
     final left = island.bounds.center.dx-50;
@@ -66,7 +66,17 @@ class IslandBubble extends StatelessWidget {
             ],
           ),
           alignment: Alignment.center,
-          child: Text(island.name, style: _bubbleTextStyle),
+          child: Row(
+            children: [
+              Text(island.name, style: _bubbleTextStyle),
+              if (island.locked)
+              const Positioned(
+                top: 0,
+                right: 0,
+                child: Icon(Icons.lock, color: Colors.white, size: 20),
+              ),
+            ],
+          ),
         ),
       ),
     );

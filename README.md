@@ -8,6 +8,12 @@ This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
+this project is using the Easy localization for translation 
+to re genrate the file 
+run the commands in the terminal 
+-  flutter pub run easy_localization:generate
+-  flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart
+
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
