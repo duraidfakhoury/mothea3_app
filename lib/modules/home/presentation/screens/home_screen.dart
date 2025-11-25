@@ -13,6 +13,7 @@ import 'package:mothea3_app/generated/locale_keys.g.dart';
 import 'package:mothea3_app/modules/home/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:mothea3_app/modules/home/presentation/components/island_buble.dart';
 import 'package:mothea3_app/modules/home/presentation/components/islands_loader.dart';
+import 'package:mothea3_app/modules/home/presentation/components/session_option.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/contact_us_route.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/knowledge_base_route.dart';
 import 'package:mothea3_app/modules/radio/presentation/routes/radio_base_levels_route.dart';
@@ -49,16 +50,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onTransformChanged() => setState(() {});
 
-  /// get the scale
   double get scale => _tc.value.getMaxScaleOnAxis();
 
-  /// 🔥 Route selector based on user academic status
   List<String> _routesForUser(Profile user) {
     switch (user.acadamicStatus) {
       case AcadimicStatus.beginner:
         return [
-          TelevisionPreCondRoute.name, // beginner TV route
-          RadioBaseLevelsRoute.name, // beginner Radio route
+          TelevisionPreCondRoute.name, 
+          RadioFieldsRoute.name,
           "",
           "",
           "",
@@ -67,8 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
       case AcadimicStatus.intermediate:
         return [
           TelevisionFieldsRoute
-              .name, // replace with intermediate route if you have
-          RadioBaseLevelsRoute.name,
+              .name, 
+          RadioFieldsRoute.name,
           "",
           "",
           "",
@@ -77,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case AcadimicStatus.advanced:
         return [
           TelevisionFieldsRoute.name,
-          RadioBaseLevelsRoute.name,
+          RadioFieldsRoute.name,
           "",
           "",
           "",
@@ -85,7 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  /// 🔥 Load islands AFTER we know the user's level
   Future<void> _initIslands(List<String> routes) async {
     final userIsBeginner = routes.first == TelevisionPreCondRoute.name;
     final islands = await loadIslands(
@@ -133,7 +131,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }).toList();
   }
 
-  /// 🔥 Extracted main UI builder
   Widget _buildHomeView() {
     final canvasBounds = _islands.isEmpty
         ? const Size(1200, 800)
@@ -162,7 +159,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
 
-        /// TOP BAR
         Positioned(
           top: 0,
           left: 0,
@@ -212,7 +208,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
 
-        /// BOTTOM BAR
         Positioned(
           bottom: 0,
           left: 0,
@@ -235,7 +230,6 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          /// Knowledge bank
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -261,7 +255,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
 
-          /// Smart Session
           ElevatedButton.icon(
             onPressed: () {
               showModalBottomSheet(
@@ -287,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       SizedBox(height: 1.5.h),
-                      _sessionOption(
+                      SessionOption(
                         icon: Icons.tv,
                         title: LocaleKeys.televisionSection.tr(),
                         locked: _islands.first.locked,
@@ -298,7 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       ),
                       SizedBox(height: 0.7.h),
-                      _sessionOption(
+                      SessionOption(
                         icon: Icons.radio,
                         title: LocaleKeys.radioSection.tr(),
                         
@@ -308,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       ),
                       SizedBox(height: 0.7.h),
-                      _sessionOption(
+                      SessionOption(
                         icon: Icons.mic,
                         title: LocaleKeys.culturalSectoin.tr(),
                         onTap: () {
@@ -317,7 +310,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       ),
                       SizedBox(height: 0.7.h),
-                      _sessionOption(
+                      SessionOption(
                         icon: Icons.person,
                         title: LocaleKeys.profile.tr(),
                         onTap: () {
@@ -326,7 +319,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       ),
                       SizedBox(height: 0.7.h),
-                      _sessionOption(
+                      SessionOption(
                         icon: Icons.settings,
                         title: LocaleKeys.settings.tr(),
                         onTap: () {
@@ -376,47 +369,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _sessionOption({
-    required IconData icon,
-    required String title,
-    bool locked = false,
-    required VoidCallback onTap,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
-        decoration: BoxDecoration(
-          color: AppColors.navyAccent.withOpacity(0.4),
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: AppColors.white),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Icon(icon, color: AppColors.yellow, size: 26),
-                const SizedBox(width: 12),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: AppColors.greyAccent,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-            if(locked)
-              Icon(Icons.lock, color: AppColors.white, size: 26),
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -454,10 +406,8 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state.isSuccess) {
             final user = state.data!;
 
-            /// build route list based on user level
             final routes = _routesForUser(user);
 
-            /// load islands only once
             if (_islands.isEmpty) {
               _initIslands(routes);
               return const Scaffold(body: AppLoader());

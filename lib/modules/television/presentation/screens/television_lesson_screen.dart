@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mothea3_app/core/constants/app_colors.dart';
+import 'package:mothea3_app/core/core_components/app_loader.dart';
+import 'package:mothea3_app/core/core_components/error_message_box.dart';
+import 'package:mothea3_app/core/core_components/return_button.dart';
 import 'package:mothea3_app/core/services/service_locator.dart';
 import 'package:mothea3_app/core/utils/base_state.dart';
 import 'package:mothea3_app/generated/locale_keys.g.dart';
@@ -48,8 +51,6 @@ class _TelevisionLessonScreenState extends State<TelevisionLessonScreen>
     super.dispose();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,19 +59,7 @@ class _TelevisionLessonScreenState extends State<TelevisionLessonScreen>
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Container(
-          margin: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
-          ),
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                color: Colors.white, size: 20),
-            onPressed: () => context.pop(),
-          ),
-        ),
+        leading: ReturnButton(onTap: () => context.pop(),),
         centerTitle: true,
         title: Text(
           widget.lesson.title,
@@ -83,105 +72,112 @@ class _TelevisionLessonScreenState extends State<TelevisionLessonScreen>
         ),
       ),
       body: BlocProvider(
-          create: (context) => TelevisionLessonBloc(sl())..add(GetTelevisionLessonEvent(lessonId: widget.lesson.id, levelId: widget.levelId
-          )),
-          child: BlocConsumer<TelevisionLessonBloc, BaseState<TelevisionLesson>>(
-            listener: (context, state) {
-              
-            },
-            builder:(context, state) {
-          if (state.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(color: Colors.white),
-            );
-          }
+        create: (context) => TelevisionLessonBloc(sl())
+          ..add(
+            GetTelevisionLessonEvent(
+              lessonId: widget.lesson.id,
+              levelId: widget.levelId,
+            ),
+          ),
+        child: BlocConsumer<TelevisionLessonBloc, BaseState<TelevisionLesson>>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            if (state.isLoading) {
+              return AppLoader();
+            }
 
-          if (state.isError) {
-            return Center(
-              child: Text(
-                LocaleKeys.noData.tr(),
-                style: TextStyle(color: Colors.redAccent, fontSize: 18),
-              ),
-            );
-          }
+            if (state.isError) {
+              return ErrorMessageBox(message: state.errorMessage);
+            }
 
-          if (state.isSuccess && state.data != null) {
-            final lesson = state.data!;
-            final words = lesson.paragraph.split(' ');
+            if (state.isSuccess && state.data != null) {
+              final lesson = state.data!;
+              final words = lesson.paragraph.split(' ');
 
-            return SafeArea(
-              child: Padding(
-        padding: EdgeInsets.all(5.w),
-        child: Column(
-          children: [
-                    Expanded(
-                      child: Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.all(4.w),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(20),
-                          border:
-                              Border.all(color: Colors.white.withOpacity(0.1)),
-                        ),
-                        child: SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: Wrap(
-                            spacing: 6,
-                            runSpacing: 6,
-                            children: List.generate(words.length, (index) {
-                              final word = words[index];
-                              return AnimatedContainer(
-                                duration: const Duration(milliseconds: 300),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 4, vertical: 2),
-                                decoration: BoxDecoration(
-                                  color:  Colors.transparent,
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: Text(
-                                  word,
-                                  style: TextStyle(
-                                    color:  Colors.white.withOpacity(0.9),
-                                    fontSize: 17,
-                                    height: 1.5,
+              return SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.all(5.w),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.all(4.w),
+                          decoration: BoxDecoration(
+                            color: AppColors.white.withOpacity(0.05),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: AppColors.white.withOpacity(0.1),
+                            ),
+                          ),
+                          child: SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            child: Wrap(
+                              spacing: 6,
+                              runSpacing: 6,
+                              children: List.generate(words.length, (index) {
+                                final word = words[index];
+                                return AnimatedContainer(
+                                  duration: const Duration(milliseconds: 300),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 4,
+                                    vertical: 2,
                                   ),
-                                ),
-                              );
-                            }),
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    word,
+                                    style: TextStyle(
+                                      color: AppColors.white.withOpacity(0.9),
+                                      fontSize: 17,
+                                      height: 1.5,
+                                    ),
+                                  ),
+                                );
+                              }),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-            SizedBox(height: 4.h),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.pinkAccent,
-                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              ),
-              onPressed: () {
-                context.push(TelevisionRecordingRoute.name,
-                    extra: lesson.paragraph,
-                  
-                );
-              },
-              icon: const Icon(Icons.videocam_rounded, color: Colors.white),
-              label: const Text("بدء التسجيل بالفيديو",
-                  style: TextStyle(color: Colors.white, fontSize: 18)),
-            ),
-          ],
+                      SizedBox(height: 4.h),
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.pinkAccent,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8.w,
+                            vertical: 2.h,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: () {
+                          context.push(
+                            TelevisionRecordingRoute.name,
+                            extra: lesson.paragraph,
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.videocam_rounded,
+                          color: AppColors.white,
+                        ),
+                        label:  Text(
+                          LocaleKeys.startRecordingVedio.tr(),
+                          style: TextStyle(color: AppColors.white, fontSize: 18),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+
+            return const SizedBox.shrink();
+          },
         ),
       ),
-            );
-          }
-
-          return const SizedBox.shrink();
-        },
-      ),
-    )
     );
   }
 }
-
-

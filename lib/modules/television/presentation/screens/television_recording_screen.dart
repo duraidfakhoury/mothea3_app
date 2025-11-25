@@ -1,7 +1,11 @@
 import 'package:camera/camera.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mothea3_app/core/constants/app_colors.dart';
+import 'package:mothea3_app/core/core_components/app_loader.dart';
+import 'package:mothea3_app/core/core_components/return_button.dart';
+import 'package:mothea3_app/generated/locale_keys.g.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class TelevisionRecordingScreen extends StatefulWidget {
@@ -59,10 +63,7 @@ class _TelevisionRecordingScreenState extends State<TelevisionRecordingScreen> {
   Widget build(BuildContext context) {
     final words = widget.paragraph.split(" ");
     if (_controller == null || !_controller!.value.isInitialized) {
-      return const Scaffold(
-        backgroundColor: AppColors.navy,
-        body: Center(child: CircularProgressIndicator(color: Colors.white)),
-      );
+      return AppLoader();
     }
 
     return Scaffold(
@@ -73,17 +74,13 @@ class _TelevisionRecordingScreenState extends State<TelevisionRecordingScreen> {
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
+            border: Border.all(color: AppColors.white.withOpacity(0.2), width: 1),
           ),
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new_rounded,
-                color: Colors.white, size: 20),
-            onPressed: () => context.pop(),
-          ),
+          child: ReturnButton(onTap: () => context.pop(),),
         ),
         centerTitle: true,
         title: Text(
-          "تسجيل الفيديو ",
+          LocaleKeys.recordVedio.tr(),
           style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -132,7 +129,7 @@ class _TelevisionRecordingScreenState extends State<TelevisionRecordingScreen> {
                                   style: TextStyle(
                                     color: isMistake
                                         ? Colors.redAccent
-                                        : Colors.white.withOpacity(0.9),
+                                        : AppColors.white.withOpacity(0.9),
                                     fontSize: 17,
                                     height: 1.5,
                                   ),
@@ -143,7 +140,6 @@ class _TelevisionRecordingScreenState extends State<TelevisionRecordingScreen> {
                         ),
             ),
           ),
-          // زر التسجيل
           Positioned(
             bottom: 5.h,
             left: 0,
@@ -154,7 +150,7 @@ class _TelevisionRecordingScreenState extends State<TelevisionRecordingScreen> {
                 onPressed: _toggleRecording,
                 child: Icon(
                   isRecording ? Icons.stop_rounded : Icons.fiber_manual_record,
-                  color: isRecording ? Colors.white : Colors.redAccent,
+                  color: isRecording ? AppColors.white : Colors.redAccent,
                   size: 36,
                 ),
               ),

@@ -2,8 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mothea3_app/core/constants/app_colors.dart';
+import 'package:mothea3_app/core/core_components/return_button.dart';
 import 'package:mothea3_app/generated/locale_keys.g.dart';
 import 'package:mothea3_app/modules/radio/presentation/routes/radio_base_levels_route.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class RadioFieldsScreen extends StatelessWidget {
   const RadioFieldsScreen({super.key});
@@ -14,41 +16,25 @@ class RadioFieldsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Container(
-          margin: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
-          ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Colors.white,
-              size: 20,
-            ),
-            onPressed: () => context.pop(),
-          ),
-        ),
+        leading: ReturnButton(onTap: () => context.pop(),),
         centerTitle: true,
         title: Text(
           LocaleKeys.radioSection.tr(),
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.white,
-            fontSize: 26,
+            fontSize: 24.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 32),
+              SizedBox(height: 4.h),
 
-              // Title with animation
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),
                 duration: const Duration(milliseconds: 800),
@@ -56,26 +42,25 @@ class RadioFieldsScreen extends StatelessWidget {
                 builder: (context, value, child) => Opacity(
                   opacity: value,
                   child: Transform.translate(
-                    offset: Offset(0, 20 * (1 - value)),
+                    offset: Offset(0, 2.h * (1 - value)),
                     child: child,
                   ),
                 ),
                 child: Center(
                   child: Text(
                     LocaleKeys.chooseYourField.tr(),
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: AppColors.yellow,
-                      fontSize: 24,
+                      fontSize: 22.sp,
                       fontWeight: FontWeight.bold,
-                      letterSpacing: 0.5,
+                      letterSpacing: 0.3,
                     ),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 12),
+              SizedBox(height: 1.5.h),
 
-              // Subtitle with animation
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),
                 duration: const Duration(milliseconds: 1000),
@@ -83,7 +68,7 @@ class RadioFieldsScreen extends StatelessWidget {
                 builder: (context, value, child) => Opacity(
                   opacity: value,
                   child: Transform.translate(
-                    offset: Offset(0, 20 * (1 - value)),
+                    offset: Offset(0, 2.h * (1 - value)),
                     child: child,
                   ),
                 ),
@@ -92,25 +77,24 @@ class RadioFieldsScreen extends StatelessWidget {
                     LocaleKeys.selectTheFieldYouWanToExplor.tr(),
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.6),
-                      fontSize: 15,
+                      fontSize: 17.sp,
                     ),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 40),
+              SizedBox(height: 5.h),
 
-              // Political Field Button with animation
+              // Political Field Card
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),
                 duration: const Duration(milliseconds: 1600),
-                curve: Curves.easeOutCubic,
                 builder: (context, value, child) => Opacity(
                   opacity: value,
-                  child: Transform.translate(
-                    offset: Offset(0, 30 * (1 - value)),
-                    child: Transform.scale(
-                      scale: 0.9 + (0.1 * value),
+                  child: Transform.scale(
+                    scale: 0.9 + (0.1 * value),
+                    child: Transform.translate(
+                      offset: Offset(0, 3.h * (1 - value)),
                       child: child,
                     ),
                   ),
@@ -130,19 +114,18 @@ class RadioFieldsScreen extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              SizedBox(height: 2.5.h),
 
-              // Economical Field Button with animation
+              // Economical Field Card
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),
                 duration: const Duration(milliseconds: 1800),
-                curve: Curves.easeOutCubic,
                 builder: (context, value, child) => Opacity(
                   opacity: value,
-                  child: Transform.translate(
-                    offset: Offset(0, 30 * (1 - value)),
-                    child: Transform.scale(
-                      scale: 0.9 + (0.1 * value),
+                  child: Transform.scale(
+                    scale: 0.9 + (0.1 * value),
+                    child: Transform.translate(
+                      offset: Offset(0, 3.h * (1 - value)),
                       child: child,
                     ),
                   ),
@@ -162,19 +145,18 @@ class RadioFieldsScreen extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              SizedBox(height: 2.5.h),
 
-              // Cultural Field Button with animation
+              // Cultural Field Card
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),
                 duration: const Duration(milliseconds: 2000),
-                curve: Curves.easeOutCubic,
                 builder: (context, value, child) => Opacity(
                   opacity: value,
-                  child: Transform.translate(
-                    offset: Offset(0, 30 * (1 - value)),
-                    child: Transform.scale(
-                      scale: 0.9 + (0.1 * value),
+                  child: Transform.scale(
+                    scale: 0.9 + (0.1 * value),
+                    child: Transform.translate(
+                      offset: Offset(0, 3.h * (1 - value)),
                       child: child,
                     ),
                   ),
@@ -188,13 +170,11 @@ class RadioFieldsScreen extends StatelessWidget {
                     Colors.deepOrange.withOpacity(0.6),
                   ],
                   glowColor: Colors.orange,
-                  onTap: () {
-                    // Navigate to cultural field
-                  },
+                  onTap: () {},
                 ),
               ),
 
-              const SizedBox(height: 40),
+              SizedBox(height: 4.h),
             ],
           ),
         ),
@@ -202,6 +182,7 @@ class RadioFieldsScreen extends StatelessWidget {
     );
   }
 
+  // Reusable card with responsive sizing
   Widget _buildFieldCard({
     required BuildContext context,
     required String title,
@@ -211,81 +192,69 @@ class RadioFieldsScreen extends StatelessWidget {
     required VoidCallback onTap,
   }) {
     return InkWell(
+      borderRadius: BorderRadius.circular(3.w),
       onTap: onTap,
-      borderRadius: BorderRadius.circular(20),
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(5.w),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: gradient,
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(4.w),
           border: Border.all(
             color: Colors.white.withOpacity(0.2),
-            width: 1.5,
+            width: 0.3.w,
           ),
           boxShadow: [
             BoxShadow(
               color: glowColor.withOpacity(0.3),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
+              blurRadius: 3.w,
+              offset: Offset(0, 1.h),
             ),
           ],
         ),
         child: Row(
           children: [
-            // Icon container
             Container(
-              height: 60,
-              width: 60,
+              height: 10.h,
+              width: 10.h,
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(3.w),
                 border: Border.all(
                   color: Colors.white.withOpacity(0.3),
-                  width: 2,
+                  width: 0.5.w,
                 ),
               ),
-              child: Icon(
-                icon,
-                color: Colors.white,
-                size: 32,
-              ),
+              child: Icon(icon, color: Colors.white, size: 6.h),
             ),
 
-            const SizedBox(width: 20),
+            SizedBox(width: 4.w),
 
-            // Text content
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 21.sp,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
 
-            // Arrow icon
             Container(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.all(2.w),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(2.w),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.arrow_forward_ios_rounded,
                 color: Colors.white,
-                size: 20,
+                size: 17.sp,
               ),
             ),
           ],

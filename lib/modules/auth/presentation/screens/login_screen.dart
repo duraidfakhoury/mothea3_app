@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           label: LocaleKeys.password.tr(),
                           hint: LocaleKeys.enterPassword.tr(),
                           keyboardType: TextInputType.visiblePassword,
-                          validator: AppValidator().passwordValidator,
+                          validator: AppValidator().freeNameValidator,
                           formKey: passwordFormKey,
                           controller: passwordController,
                           isPass: true,

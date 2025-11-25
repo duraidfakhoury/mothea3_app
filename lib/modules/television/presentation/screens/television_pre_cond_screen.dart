@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mothea3_app/core/constants/app_colors.dart';
 import 'package:mothea3_app/core/core_components/app_button.dart';
+import 'package:mothea3_app/core/core_components/return_button.dart';
 import 'package:mothea3_app/generated/locale_keys.g.dart';
 
 class TelevisionPreCondScreen extends StatelessWidget {
@@ -14,28 +15,13 @@ class TelevisionPreCondScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Container(
-          margin: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
-          ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Colors.white,
-              size: 20,
-            ),
-            onPressed: () => context.pop(),
-          ),
-        ),
+        leading: ReturnButton(onTap: () => context.pop(),),
         centerTitle: true,
         title: Text.rich(
           TextSpan(
             text: LocaleKeys.section.tr(),
             style: const TextStyle(
-              color: Colors.white,
+              color: AppColors.white,
               fontSize: 26,
               fontWeight: FontWeight.bold,
             ),
@@ -57,11 +43,7 @@ class TelevisionPreCondScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Lock Icon with Glow Effect
-              
               const SizedBox(height: 20),
-
-              // Description with better styling
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -105,8 +87,6 @@ class TelevisionPreCondScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: 32),
-
-              // Unlock Options Title
               Text(
                 LocaleKeys.unlockOptions.tr(),
                 style: TextStyle(
@@ -115,10 +95,7 @@ class TelevisionPreCondScreen extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-
               const SizedBox(height: 16),
-
-              // Option 1: Progress through Radio Section
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -177,21 +154,18 @@ class TelevisionPreCondScreen extends StatelessWidget {
                     ),
                     Icon(
                       Icons.arrow_forward_ios_rounded,
-                      color: Colors.white.withOpacity(0.3),
+                      color: AppColors.white.withOpacity(0.3),
                       size: 16,
                     ),
                   ],
                 ),
               ),
-
               const SizedBox(height: 16),
-
-              // Divider with text
               Row(
                 children: [
                   Expanded(
                     child: Divider(
-                      color: Colors.white.withOpacity(0.2),
+                      color: AppColors.white.withOpacity(0.2),
                       thickness: 1,
                     ),
                   ),
@@ -200,7 +174,7 @@ class TelevisionPreCondScreen extends StatelessWidget {
                     child: Text(
                       LocaleKeys.or.tr(),
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
+                        color: AppColors.white.withOpacity(0.5),
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
@@ -208,16 +182,13 @@ class TelevisionPreCondScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: Divider(
-                      color: Colors.white.withOpacity(0.2),
+                      color: AppColors.white.withOpacity(0.2),
                       thickness: 1,
                     ),
                   ),
                 ],
               ),
-
               const SizedBox(height: 16),
-
-              // Option 2: Take Placement Test
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(24),
@@ -266,7 +237,7 @@ class TelevisionPreCondScreen extends StatelessWidget {
                     Text(
                       LocaleKeys.takePlacementTest.tr(),
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -276,7 +247,7 @@ class TelevisionPreCondScreen extends StatelessWidget {
                       LocaleKeys.skipaHeadByDemontratingYourSkills.tr(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.7),
+                        color: AppColors.white.withOpacity(0.7),
                         fontSize: 14,
                       ),
                     ),
@@ -288,7 +259,6 @@ class TelevisionPreCondScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
               const SizedBox(height: 40),
             ],
           ),

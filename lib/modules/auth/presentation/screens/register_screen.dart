@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:logger/logger.dart';
 import 'package:mothea3_app/core/core_components/app_button.dart';
 import 'package:mothea3_app/core/core_components/app_text_form_field.dart';
+import 'package:mothea3_app/core/core_components/return_button.dart';
 import 'package:mothea3_app/core/core_components/show_snack_bar.dart';
 import 'package:mothea3_app/core/enums/auth_status.dart';
 import 'package:mothea3_app/core/services/service_locator.dart';
@@ -24,26 +25,26 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   final firstNameFormKey = GlobalKey<FormState>();
   final lastNameFormKey = GlobalKey<FormState>();
-  final userNameFormKey = GlobalKey<FormState>();  
-  final emailFormKey =GlobalKey<FormState>();
+  final userNameFormKey = GlobalKey<FormState>();
+  final emailFormKey = GlobalKey<FormState>();
   final passwordFormKey = GlobalKey<FormState>();
   final confirmPasswordFormKey = GlobalKey<FormState>();
 
- @override
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=> sl<RegisterBloc>(),
-      child: BlocConsumer<RegisterBloc , BaseState<AuthStatus>>(
+      create: (context) => sl<RegisterBloc>(),
+      child: BlocConsumer<RegisterBloc, BaseState<AuthStatus>>(
         listener: _registerListener,
         builder: (context, state) {
           return Scaffold(
@@ -53,19 +54,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: 100.h,
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 7.w ,vertical:7.w ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 7.w,
+                      vertical: 7.w,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                                      IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  context.go(LoginRoute.name);
-                },
-              ),
-                        SizedBox(height: 1.5.h,),
-                        Text(LocaleKeys.registerYourAccountWithMothea3.tr(),style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize:24 ),),
-                        SizedBox(height: 2.h,),
+                        Row(
+                          children: [
+                            ReturnButton(onTap: () => context.go(LoginRoute.name),),
+                            Text(
+                              LocaleKeys.registerYourAccountWithMothea3.tr(),
+                              style: Theme.of(
+                                context,
+                              ).textTheme.headlineLarge?.copyWith(fontSize: 18),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 2.h),
                         AppTextFormField(
                           label: LocaleKeys.firstName.tr(),
                           hint: LocaleKeys.enterYourFirstName.tr(),
@@ -73,8 +80,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           validator: AppValidator().freeNameValidator,
                           formKey: firstNameFormKey,
                           controller: firstNameController,
-                          ),
-                        SizedBox(height: 1.h,),
+                        ),
+                        SizedBox(height: 1.h),
                         AppTextFormField(
                           label: LocaleKeys.lastName.tr(),
                           hint: LocaleKeys.enterYourLastName.tr(),
@@ -82,8 +89,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           validator: AppValidator().freeNameValidator,
                           formKey: lastNameFormKey,
                           controller: lastNameController,
-                          ),
-                        SizedBox(height: 1.h,),
+                        ),
+                        SizedBox(height: 1.h),
                         AppTextFormField(
                           label: LocaleKeys.userName.tr(),
                           hint: LocaleKeys.enterYourUserName.tr(),
@@ -91,8 +98,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           validator: AppValidator().freeNameValidator,
                           formKey: userNameFormKey,
                           controller: userNameController,
-                          ),
-                        SizedBox(height: 1.h,),
+                        ),
+                        SizedBox(height: 1.h),
                         AppTextFormField(
                           label: LocaleKeys.email.tr(),
                           hint: LocaleKeys.enterYourEmail.tr(),
@@ -100,8 +107,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           validator: AppValidator().emailValidator,
                           formKey: emailFormKey,
                           controller: emailController,
-                          ),
-                        SizedBox(height: 1.h,),
+                        ),
+                        SizedBox(height: 1.h),
                         AppTextFormField(
                           label: LocaleKeys.password.tr(),
                           hint: LocaleKeys.enterPassword.tr(),
@@ -110,21 +117,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           formKey: passwordFormKey,
                           controller: passwordController,
                           isPass: true,
-                          ),
-                        SizedBox(height: 1.h,),
+                        ),
+                        SizedBox(height: 1.h),
                         AppTextFormField(
                           label: LocaleKeys.confrimPassword.tr(),
-                          hint: LocaleKeys.reEnterYourPasswordforConfirmation.tr(),
+                          hint: LocaleKeys.reEnterYourPasswordforConfirmation
+                              .tr(),
                           keyboardType: TextInputType.visiblePassword,
-                          validator: (value) => AppValidator()
-                              .confirmPasswordValidator(
-                              value, passwordController.text),
+                          validator: (value) =>
+                              AppValidator().confirmPasswordValidator(
+                                value,
+                                passwordController.text,
+                              ),
                           formKey: confirmPasswordFormKey,
                           controller: confirmPasswordController,
                           isPass: true,
-                          ),
-                        SizedBox(height: 1.h,),
-                        AppButton(label: LocaleKeys.register.tr(), onTap:()=>_registerPressed(context,state) ),
+                        ),
+                        SizedBox(height: 1.h),
+                        AppButton(
+                          label: LocaleKeys.register.tr(),
+                          onTap: () => _registerPressed(context, state),
+                        ),
                       ],
                     ),
                   ),
@@ -133,8 +146,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           );
         },
-        ),
-      );
+      ),
+    );
   }
 
   bool _checkInvalid(BaseState<void> state) {
@@ -150,8 +163,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       successCases: [!state.isLoading],
     );
   }
+
   void _registerPressed(BuildContext context, BaseState<AuthStatus> state) {
-    if(_checkInvalid(state)) return;
+    if (_checkInvalid(state)) return;
     // context.read<RegisterBloc>().add(
     //       RegisterTappedEvent(
     //         password: passwordController.text,
@@ -160,8 +174,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     //     );
   }
 
-
-    void _registerListener(BuildContext context, BaseState<AuthStatus> state) {
+  void _registerListener(BuildContext context, BaseState<AuthStatus> state) {
     if (state.isError || state.data! == AuthStatus.unAuthenticated) {
       showSnackBar(context, failure: state.failure, checkFailureType: false);
       return;
@@ -170,10 +183,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     if (state.isSuccess && state.data! == AuthStatus.authenticated) {
       context.go(HomeRoute.name);
-      showSnackBar(context,
-          successMessage: "Welcome Back");
+      showSnackBar(context, successMessage: "Welcome Back");
       return;
     }
-    
   }
 }

@@ -27,6 +27,8 @@ abstract class  LocaleKeys {
   static const progressThroughStages = 'progressThroughStages';
   static const takePlacementTest = 'takePlacementTest';
   static const skipaHeadByDemontratingYourSkills = 'skipaHeadByDemontratingYourSkills';
+  static const startRecordingVedio = 'startRecordingVedio';
+  static const recordVedio = 'recordVedio';
   static const chooseYourField = 'chooseYourField';
   static const selectTheFieldYouWanToExplor = 'selectTheFieldYouWanToExplor';
   static const PoliticalField = 'PoliticalField';

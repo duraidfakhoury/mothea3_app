@@ -2,8 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mothea3_app/core/constants/app_colors.dart';
+import 'package:mothea3_app/core/core_components/return_button.dart';
 import 'package:mothea3_app/generated/locale_keys.g.dart';
 import 'package:mothea3_app/modules/television/presentation/routes/television_base_levels_route.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class TelevisionFieldsScreen extends StatelessWidget {
   const TelevisionFieldsScreen({super.key});
@@ -14,22 +16,7 @@ class TelevisionFieldsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Container(
-          margin: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.white.withOpacity(0.2), width: 1),
-          ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-              color: Colors.white,
-              size: 20,
-            ),
-            onPressed: () => context.pop(),
-          ),
-        ),
+        leading: ReturnButton(onTap: () => context.pop()),
         centerTitle: true,
         title: Text(
           LocaleKeys.televisionSection.tr(),
@@ -47,8 +34,6 @@ class TelevisionFieldsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 32),
-
-              // Title with animation
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),
                 duration: const Duration(milliseconds: 800),
@@ -72,10 +57,7 @@ class TelevisionFieldsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
               const SizedBox(height: 12),
-
-              // Subtitle with animation
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),
                 duration: const Duration(milliseconds: 1000),
@@ -97,10 +79,7 @@ class TelevisionFieldsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
               const SizedBox(height: 40),
-
-              // Political Field Button with animation
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),
                 duration: const Duration(milliseconds: 1600),
@@ -132,7 +111,6 @@ class TelevisionFieldsScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // Economical Field Button with animation
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),
                 duration: const Duration(milliseconds: 1800),
@@ -164,7 +142,6 @@ class TelevisionFieldsScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // Cultural Field Button with animation
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),
                 duration: const Duration(milliseconds: 2000),
@@ -211,81 +188,69 @@ class TelevisionFieldsScreen extends StatelessWidget {
     required VoidCallback onTap,
   }) {
     return InkWell(
+      borderRadius: BorderRadius.circular(3.w),
       onTap: onTap,
-      borderRadius: BorderRadius.circular(20),
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(5.w),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: gradient,
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(4.w),
           border: Border.all(
             color: Colors.white.withOpacity(0.2),
-            width: 1.5,
+            width: 0.3.w,
           ),
           boxShadow: [
             BoxShadow(
               color: glowColor.withOpacity(0.3),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
+              blurRadius: 3.w,
+              offset: Offset(0, 1.h),
             ),
           ],
         ),
         child: Row(
           children: [
-            // Icon container
             Container(
-              height: 60,
-              width: 60,
+              height: 10.h,
+              width: 10.h,
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(3.w),
                 border: Border.all(
                   color: Colors.white.withOpacity(0.3),
-                  width: 2,
+                  width: 0.5.w,
                 ),
               ),
-              child: Icon(
-                icon,
-                color: Colors.white,
-                size: 32,
-              ),
+              child: Icon(icon, color: Colors.white, size: 6.h),
             ),
 
-            const SizedBox(width: 20),
+            SizedBox(width: 4.w),
 
-            // Text content
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 21.sp,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
 
-            // Arrow icon
             Container(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.all(2.w),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(2.w),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.arrow_forward_ios_rounded,
                 color: Colors.white,
-                size: 20,
+                size: 17.sp,
               ),
             ),
           ],
