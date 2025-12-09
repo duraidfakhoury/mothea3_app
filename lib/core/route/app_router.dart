@@ -5,6 +5,7 @@ import 'package:mothea3_app/modules/auth/presentation/blocs/splash_bloc/splash_b
 import 'package:mothea3_app/modules/auth/presentation/routes/login_route.dart';
 import 'package:mothea3_app/modules/auth/presentation/routes/register_route.dart';
 import 'package:mothea3_app/modules/auth/presentation/routes/splash_route.dart';
+import 'package:mothea3_app/modules/cultural/presentation/routes/cultural_base_levels_route.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/contact_us_route.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/home_route.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/knowledge_base_route.dart';
@@ -71,6 +72,7 @@ class AppRouter {
       TelevisionPreCondRoute.route,
       TelevisionFieldsRoute.route,
       RadioFieldsRoute.route,
+      CulturalBaseLevelsRoute.route
       
     ]
     );

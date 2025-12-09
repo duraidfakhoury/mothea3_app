@@ -513,7 +513,8 @@ class CodegenLoader extends AssetLoader{
   "viaScanning": "عبر المسح الضوئي",
   "whenRegisterYouAcceptPolicy": "عند انشاء محفظة الكترونية انت توافق على سياسة الخصوصية لشركة E-pay",
   "idScanning": "مسح الهوية الوطنية",
-  "passportScanning": "مسح جواز السفر"
+  "passportScanning": "مسح جواز السفر",
+  "youHaveThreeLessonsToCompleteThisCourse": "لديك ثلاث نصوص لإكمالها لتخطي هذا القسم "
 };
 static const Map<String,dynamic> _en_US = {
   "mothea3": "Mothea3",
@@ -1014,7 +1015,8 @@ static const Map<String,dynamic> _en_US = {
   "viaScanning": "Via scanning",
   "whenRegisterYouAcceptPolicy": "By creating an eWallet, you agree to E-pay's privacy policy.",
   "idScanning": "Scan National Id",
-  "passportScanning": "Scan Passport"
+  "passportScanning": "Scan Passport",
+  "youHaveThreeLessonsToCompleteThisCourse": "You Have Three lessons to Complete this Course"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar_SY": _ar_SY, "en_US": _en_US};
 }

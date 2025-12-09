@@ -497,5 +497,6 @@
     "viaScanning": "Via scanning",
     "whenRegisterYouAcceptPolicy": "By creating an eWallet, you agree to E-pay's privacy policy.",
     "idScanning": "Scan National Id",
-    "passportScanning": "Scan Passport"
+    "passportScanning": "Scan Passport",
+    "youHaveThreeLessonsToCompleteThisCourse" : "You Have Three lessons to Complete this Course"
 }

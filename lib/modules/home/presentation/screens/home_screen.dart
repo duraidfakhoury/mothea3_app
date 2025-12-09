@@ -10,13 +10,13 @@ import 'package:mothea3_app/core/services/service_locator.dart';
 import 'package:mothea3_app/core/utils/base_state.dart';
 import 'package:mothea3_app/core/utils/island_painter.dart';
 import 'package:mothea3_app/generated/locale_keys.g.dart';
+import 'package:mothea3_app/modules/cultural/presentation/routes/cultural_base_levels_route.dart';
 import 'package:mothea3_app/modules/home/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:mothea3_app/modules/home/presentation/components/island_buble.dart';
 import 'package:mothea3_app/modules/home/presentation/components/islands_loader.dart';
 import 'package:mothea3_app/modules/home/presentation/components/session_option.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/contact_us_route.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/knowledge_base_route.dart';
-import 'package:mothea3_app/modules/radio/presentation/routes/radio_base_levels_route.dart';
 import 'package:mothea3_app/modules/radio/presentation/routes/radio_fields_route.dart';
 import 'package:mothea3_app/modules/auth/domain/entity/profile.dart'; // for enum
 import 'package:mothea3_app/modules/television/presentation/routes/television_fields_route.dart';
@@ -56,19 +56,18 @@ class _HomeScreenState extends State<HomeScreen> {
     switch (user.acadamicStatus) {
       case AcadimicStatus.beginner:
         return [
-          TelevisionPreCondRoute.name, 
+          TelevisionPreCondRoute.name,
           RadioFieldsRoute.name,
-          "",
+          CulturalBaseLevelsRoute.name,
           "",
           "",
         ];
 
       case AcadimicStatus.intermediate:
         return [
-          TelevisionFieldsRoute
-              .name, 
+          TelevisionFieldsRoute.name,
           RadioFieldsRoute.name,
-          "",
+          CulturalBaseLevelsRoute.name,
           "",
           "",
         ];
@@ -77,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return [
           TelevisionFieldsRoute.name,
           RadioFieldsRoute.name,
-          "",
+          CulturalBaseLevelsRoute.name,
           "",
           "",
         ];
@@ -286,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         locked: _islands.first.locked,
                         onTap: () {
                           Navigator.pop(context);
-                          
+
                           context.push(_islands.first.route);
                         },
                       ),
@@ -294,7 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SessionOption(
                         icon: Icons.radio,
                         title: LocaleKeys.radioSection.tr(),
-                        
+
                         onTap: () {
                           Navigator.pop(context);
                           context.push(RadioFieldsRoute.name);
@@ -305,8 +304,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         icon: Icons.mic,
                         title: LocaleKeys.culturalSectoin.tr(),
                         onTap: () {
-                          Navigator.pop(context); 
-                          //context.push('/session/radio');
+                          Navigator.pop(context);
+                          context.push(CulturalBaseLevelsRoute.name);
                         },
                       ),
                       SizedBox(height: 0.7.h),
@@ -314,7 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         icon: Icons.person,
                         title: LocaleKeys.profile.tr(),
                         onTap: () {
-                          Navigator.pop(context); 
+                          Navigator.pop(context);
                           //context.push('/session/public-speaking');
                         },
                       ),

@@ -7,6 +7,11 @@ import 'package:mothea3_app/modules/auth/domain/repository/auth_repository.dart'
 import 'package:mothea3_app/modules/auth/presentation/blocs/login_bloc/login_bloc.dart';
 import 'package:mothea3_app/modules/auth/presentation/blocs/register_bloc/register_bloc.dart';
 import 'package:mothea3_app/modules/auth/presentation/blocs/splash_bloc/splash_bloc.dart';
+import 'package:mothea3_app/modules/cultural/data/data_source/cultural_data_source.dart';
+import 'package:mothea3_app/modules/cultural/data/data_source/cultural_data_source_impl.dart';
+import 'package:mothea3_app/modules/cultural/data/repository/cultural_repository_impl.dart';
+import 'package:mothea3_app/modules/cultural/domain/repository/cultural_repository.dart';
+import 'package:mothea3_app/modules/cultural/presentation/blocs/cultural_base_levels_bloc/cultural_base_levels_bloc.dart';
 import 'package:mothea3_app/modules/home/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:mothea3_app/modules/radio/data/data_source/radio_data_source.dart';
 import 'package:mothea3_app/modules/radio/data/data_source/radio_data_source_impl.dart';
@@ -31,33 +36,49 @@ class ServiceLocator {
   factory ServiceLocator() => _instance ?? ServiceLocator._();
 
   void init() {
-  // Theme Bloc 
-  sl.registerFactory(() => ThemeBloc());
+    // Theme Bloc
+    sl.registerFactory(() => ThemeBloc());
 
-  // Data sources
-  sl.registerLazySingleton<AuthDataSource>(() => AuthDataSourceImpl());
-  sl.registerLazySingleton<RadioDataSource>(() => RadioDataSourceImpl());
-  sl.registerLazySingleton<TelevisionDataSource>(() => TelevisionDataSourceImpl());
+    // Data sources
+    sl.registerLazySingleton<AuthDataSource>(() => AuthDataSourceImpl());
+    sl.registerLazySingleton<RadioDataSource>(() => RadioDataSourceImpl());
+    sl.registerLazySingleton<TelevisionDataSource>(
+      () => TelevisionDataSourceImpl(),
+    );
+    sl.registerLazySingleton<CulturalDataSource>(
+      () => CulturalDataSourceImpl(),
+    );
 
-  // Repositories
-  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
-  sl.registerLazySingleton<RadioRepository>(() => RadioRepositoryImpl(radioDataSource: sl()));
-  sl.registerLazySingleton<TelevisionRepository>(() => TelevisionRepositoryImpl(televisionDataSource: sl()));
+    // Repositories
+    sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
+    sl.registerLazySingleton<RadioRepository>(
+      () => RadioRepositoryImpl(radioDataSource: sl()),
+    );
+    sl.registerLazySingleton<TelevisionRepository>(
+      () => TelevisionRepositoryImpl(televisionDataSource: sl()),
+    );
+    sl.registerLazySingleton<CulturalRepository>(
+      () => CulturalRepositoryImpl(culturalDataSource: sl()),
+    );
 
-  // Auth Blocs
-  sl.registerFactory(() => SplashBloc(auth: sl()));
-  sl.registerFactory(() => LoginBloc(sl()));
-  sl.registerFactory(() => RegisterBloc(sl()));
-  sl.registerFactory(()=> UserBloc(sl()));
+    // Auth Blocs
+    sl.registerFactory(() => SplashBloc(auth: sl()));
+    sl.registerFactory(() => LoginBloc(sl()));
+    sl.registerFactory(() => RegisterBloc(sl()));
+    sl.registerFactory(() => UserBloc(sl()));
 
-  // Radio Blocs 
-  sl.registerLazySingleton(() => RadioBaseLevelsBloc(sl()));
-  sl.registerLazySingleton(() => RadioLevelLessonsBloc(sl()));
-  sl.registerLazySingleton(() => RadioLessonBloc(sl()));
+    // Radio Blocs
+    sl.registerLazySingleton(() => RadioBaseLevelsBloc(sl()));
+    sl.registerLazySingleton(() => RadioLevelLessonsBloc(sl()));
+    sl.registerLazySingleton(() => RadioLessonBloc(sl()));
 
-  // Television Blocs 
-  sl.registerLazySingleton(() => TelevisionBaseLevelsBloc(sl()));
-  sl.registerLazySingleton(() => TelevisionLevelLessonsBloc(sl()));
-  sl.registerLazySingleton(() => TelevisionLessonBloc(sl()));
-}
+    // Television Blocs
+    sl.registerLazySingleton(() => TelevisionBaseLevelsBloc(sl()));
+    sl.registerLazySingleton(() => TelevisionLevelLessonsBloc(sl()));
+    sl.registerLazySingleton(() => TelevisionLessonBloc(sl()));
+
+    //cultural blocs
+
+    sl.registerLazySingleton(() => CulturalBaseLevelsBloc(sl()));
+  }
 }

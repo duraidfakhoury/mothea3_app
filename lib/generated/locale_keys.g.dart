@@ -502,5 +502,6 @@ abstract class  LocaleKeys {
   static const whenRegisterYouAcceptPolicy = 'whenRegisterYouAcceptPolicy';
   static const idScanning = 'idScanning';
   static const passportScanning = 'passportScanning';
+  static const youHaveThreeLessonsToCompleteThisCourse = 'youHaveThreeLessonsToCompleteThisCourse';
 
 }
