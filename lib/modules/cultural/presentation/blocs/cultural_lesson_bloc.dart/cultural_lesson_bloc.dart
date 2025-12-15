@@ -22,9 +22,6 @@ class CulturalLessonBloc
     );
   }
 
-  // ===============================
-  // LOAD LESSON
-  // ===============================
   FutureOr<void> _getLesson(
     GetLessonEvent event,
     Emitter<CulturalLessonState> emit,

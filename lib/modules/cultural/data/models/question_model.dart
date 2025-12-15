@@ -10,7 +10,7 @@ class QuestionModel extends Question {
   factory QuestionModel.fromJson(Map<String, dynamic> json) {
     return QuestionModel(
       id: json["id"],
-      options: json["options"],
+      options: Map<String, String>.from(json['options']),
       question: json["question"],
     );
   }

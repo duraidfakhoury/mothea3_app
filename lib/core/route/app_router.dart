@@ -6,9 +6,12 @@ import 'package:mothea3_app/modules/auth/presentation/routes/login_route.dart';
 import 'package:mothea3_app/modules/auth/presentation/routes/register_route.dart';
 import 'package:mothea3_app/modules/auth/presentation/routes/splash_route.dart';
 import 'package:mothea3_app/modules/cultural/presentation/routes/cultural_base_levels_route.dart';
+import 'package:mothea3_app/modules/cultural/presentation/routes/cultural_lesson_route.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/contact_us_route.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/home_route.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/knowledge_base_route.dart';
+import 'package:mothea3_app/modules/home/presentation/routes/profile_route.dart';
+import 'package:mothea3_app/modules/home/presentation/routes/settings_route.dart';
 import 'package:mothea3_app/modules/radio/presentation/routes/radio_base_levels_route.dart';
 import 'package:mothea3_app/modules/radio/presentation/routes/radio_fields_route.dart';
 import 'package:mothea3_app/modules/radio/presentation/routes/radio_lesson_route.dart';
@@ -21,19 +24,18 @@ import 'package:mothea3_app/modules/television/presentation/routes/television_pr
 import 'package:mothea3_app/modules/television/presentation/routes/television_recording_route.dart';
 
 class AppRouter {
-
   static final router = GoRouter(
     initialLocation: SplashRoute.name,
     redirect: (context, state) {
       // Use context.read() to get the current state of the Bloc
-      final initStatus = context.read<SplashBloc>().state; 
+      final initStatus = context.read<SplashBloc>().state;
       final isSplash = state.matchedLocation == SplashRoute.name;
 
       // 1. If Initialization is IN PROGRESS
       if (initStatus is InitInProgress) {
         // Stay on the splash screen (return null) if that's where we are
         // Otherwise, force navigation back to the splash screen
-        return isSplash ? null : SplashRoute.name; 
+        return isSplash ? null : SplashRoute.name;
       }
 
       // 2. If Initialization is COMPLETE
@@ -51,7 +53,7 @@ class AppRouter {
         // If we are not on the splash screen, let the navigation continue normally.
         return null;
       }
-      
+
       // Fallback
       return null;
     },
@@ -62,6 +64,8 @@ class AppRouter {
       RegisterRoute.route,
       KnowledgeBaseRoute.route,
       ContactUsRoute.route,
+      ProfileRoute.route,
+      SettingsRoute.route,
       RadioBaseLevelsRoute.route,
       RadioLevelLessonsRoute.route,
       RadioLessonRoute.route,
@@ -72,9 +76,8 @@ class AppRouter {
       TelevisionPreCondRoute.route,
       TelevisionFieldsRoute.route,
       RadioFieldsRoute.route,
-      CulturalBaseLevelsRoute.route
-      
-    ]
-    );
-
+      CulturalBaseLevelsRoute.route,
+      CulturalLessonRoute.route,
+    ],
+  );
 }

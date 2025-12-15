@@ -29,7 +29,7 @@ class CulturalDataSourceImpl extends CulturalDataSource {
     final String jsonString = await rootBundle.loadString(
       'assets/local_jsons/cultural_lesson_$lessonId.json',
     );
-    final Map<String,dynamic> jsonMap = jsonDecode(jsonString);
+    final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
 
     return CulturalLessonModel.fromJson(jsonMap);
   }
@@ -40,14 +40,10 @@ class CulturalDataSourceImpl extends CulturalDataSource {
       'assets/local_jsons/cultural_mcq_lesson_$lessonId.json',
     );
 
-    // Decode the JSON string
-    final List<dynamic> jsonList = json.decode(jsonString);
+    final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
 
-    // Map each JSON object to a model
-    final List<QuestionModel> questions = jsonList
-        .map((json) => QuestionModel.fromJson(json))
-        .toList();
+    final List<dynamic> jsonList = jsonMap["questions"];
 
-    return questions;
+    return jsonList.map((q) => QuestionModel.fromJson(q)).toList();
   }
 }

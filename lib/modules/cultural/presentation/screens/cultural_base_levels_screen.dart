@@ -12,6 +12,7 @@ import 'package:mothea3_app/core/utils/base_state.dart';
 import 'package:mothea3_app/generated/locale_keys.g.dart';
 import 'package:mothea3_app/modules/cultural/domain/entity/cultural_base_level.dart';
 import 'package:mothea3_app/modules/cultural/presentation/blocs/cultural_base_levels_bloc/cultural_base_levels_bloc.dart';
+import 'package:mothea3_app/modules/cultural/presentation/routes/cultural_lesson_route.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CulturalBaseLevelsScreen extends StatelessWidget {
@@ -173,9 +174,10 @@ class CulturalBaseLevelsScreen extends StatelessWidget {
                                     lesson: lesson,
                                     index: index,
                                     onTap: () {
-                                      // context.push(
-                                      //   TelevisionLessonRoute.name,
-                                      // );
+                                      context.push(
+                                        CulturalLessonRoute.name,
+                                        extra: lesson.id,
+                                      );
                                     },
                                   ),
                                 ),

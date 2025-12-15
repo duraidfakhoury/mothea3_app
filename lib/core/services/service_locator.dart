@@ -12,6 +12,7 @@ import 'package:mothea3_app/modules/cultural/data/data_source/cultural_data_sour
 import 'package:mothea3_app/modules/cultural/data/repository/cultural_repository_impl.dart';
 import 'package:mothea3_app/modules/cultural/domain/repository/cultural_repository.dart';
 import 'package:mothea3_app/modules/cultural/presentation/blocs/cultural_base_levels_bloc/cultural_base_levels_bloc.dart';
+import 'package:mothea3_app/modules/cultural/presentation/blocs/cultural_lesson_bloc.dart/cultural_lesson_bloc.dart';
 import 'package:mothea3_app/modules/home/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:mothea3_app/modules/radio/data/data_source/radio_data_source.dart';
 import 'package:mothea3_app/modules/radio/data/data_source/radio_data_source_impl.dart';
@@ -80,5 +81,6 @@ class ServiceLocator {
     //cultural blocs
 
     sl.registerLazySingleton(() => CulturalBaseLevelsBloc(sl()));
+    sl.registerLazySingleton(() => CulturalLessonBloc(sl()));
   }
 }

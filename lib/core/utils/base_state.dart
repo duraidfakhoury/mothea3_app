@@ -41,7 +41,7 @@ class BaseState<T> extends Equatable {
   }
 
   // Returns a new BaseState object with the request status set to success and new data
-  BaseState<T?> success(T newData) {
+  BaseState<T> success(T newData) {
     return copyWith(requestStatus: RequestStatus.success, data: newData);
   }
 

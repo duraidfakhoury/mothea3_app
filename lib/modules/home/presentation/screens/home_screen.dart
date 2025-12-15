@@ -17,6 +17,8 @@ import 'package:mothea3_app/modules/home/presentation/components/islands_loader.
 import 'package:mothea3_app/modules/home/presentation/components/session_option.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/contact_us_route.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/knowledge_base_route.dart';
+import 'package:mothea3_app/modules/home/presentation/routes/profile_route.dart';
+import 'package:mothea3_app/modules/home/presentation/routes/settings_route.dart';
 import 'package:mothea3_app/modules/radio/presentation/routes/radio_fields_route.dart';
 import 'package:mothea3_app/modules/auth/domain/entity/profile.dart'; // for enum
 import 'package:mothea3_app/modules/television/presentation/routes/television_fields_route.dart';
@@ -59,8 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
           TelevisionPreCondRoute.name,
           RadioFieldsRoute.name,
           CulturalBaseLevelsRoute.name,
-          "",
-          "",
+          ProfileRoute.name,
+          SettingsRoute.name,
         ];
 
       case AcadimicStatus.intermediate:
@@ -68,8 +70,8 @@ class _HomeScreenState extends State<HomeScreen> {
           TelevisionFieldsRoute.name,
           RadioFieldsRoute.name,
           CulturalBaseLevelsRoute.name,
-          "",
-          "",
+          ProfileRoute.name,
+          SettingsRoute.name,
         ];
 
       case AcadimicStatus.advanced:
@@ -77,8 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
           TelevisionFieldsRoute.name,
           RadioFieldsRoute.name,
           CulturalBaseLevelsRoute.name,
-          "",
-          "",
+          ProfileRoute.name,
+          SettingsRoute.name,
         ];
     }
   }
@@ -314,7 +316,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         title: LocaleKeys.profile.tr(),
                         onTap: () {
                           Navigator.pop(context);
-                          //context.push('/session/public-speaking');
+                          context.push(ProfileRoute.name);
                         },
                       ),
                       SizedBox(height: 0.7.h),
@@ -323,6 +325,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         title: LocaleKeys.settings.tr(),
                         onTap: () {
                           Navigator.pop(context);
+                          context.push(SettingsRoute.name);
                         },
                       ),
                       SizedBox(height: 1.h),
