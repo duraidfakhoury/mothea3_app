@@ -9,8 +9,9 @@ class TelevisionDataSourceImpl extends TelevisionDataSource {
   @override
   Future<List<TelevisionBaseLevelModel>> getTelevisionBaseLevels() async {
     // Load the local JSON file
-    final String jsonString =
-        await rootBundle.loadString('assets/local_jsons/television_base_levels.json');
+    final String jsonString = await rootBundle.loadString(
+      'assets/local_jsons/television_base_levels.json',
+    );
 
     // Decode the JSON string
     final List<dynamic> jsonList = json.decode(jsonString);
@@ -22,11 +23,16 @@ class TelevisionDataSourceImpl extends TelevisionDataSource {
 
     return levels;
   }
+
   @override
-  Future<List<TelevisionLevelLessonModel>> getTelevisionLevelLessons(int levelId) async {
+  Future<List<TelevisionLevelLessonModel>> getTelevisionLevelLessons(
+    int levelId,
+  ) async {
     // Load the local JSON file
-    final String jsonString =
-        await rootBundle.loadString('assets/local_jsons/television_level_lessons.json');
+    print('assets/local_jsons/television_level_${levelId}_lessons.json');
+    final String jsonString = await rootBundle.loadString(
+      'assets/local_jsons/television_level_${levelId}_lessons.json',
+    );
 
     // Decode the JSON string
     final List<dynamic> jsonList = json.decode(jsonString);
@@ -38,17 +44,24 @@ class TelevisionDataSourceImpl extends TelevisionDataSource {
 
     return levels;
   }
-    @override
-  Future<TelevisionLessonModel> getTelevisionLesson(int levelId , int lessonId) async {
+
+  @override
+  Future<TelevisionLessonModel> getTelevisionLesson(
+    int levelId,
+    int lessonId,
+  ) async {
     // Load the local JSON file
-    final String jsonString =
-        await rootBundle.loadString('assets/local_jsons/television_lesson.json');
+    final String jsonString = await rootBundle.loadString(
+      'assets/local_jsons/television_lesson.json',
+    );
 
     // Decode the JSON string
-    final Map<String,dynamic> decodedJson = json.decode(jsonString);
+    final Map<String, dynamic> decodedJson = json.decode(jsonString);
 
     // Map each JSON object to a model
-    final TelevisionLessonModel lesson = TelevisionLessonModel.fromJson(decodedJson);
+    final TelevisionLessonModel lesson = TelevisionLessonModel.fromJson(
+      decodedJson,
+    );
 
     return lesson;
   }

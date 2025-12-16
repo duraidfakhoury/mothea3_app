@@ -158,8 +158,8 @@ class TelevisionFieldsScreen extends StatelessWidget {
                 ),
                 child: _buildFieldCard(
                   context: context,
-                  title: LocaleKeys.culturalField.tr(),
-                  icon: Icons.palette_rounded,
+                  title: LocaleKeys.sportField.tr(),
+                  icon: Icons.sports_soccer_rounded,
                   gradient: [
                     Colors.orange.withOpacity(0.8),
                     Colors.deepOrange.withOpacity(0.6),

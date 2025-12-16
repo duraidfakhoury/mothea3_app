@@ -18,6 +18,7 @@ import 'package:mothea3_app/modules/radio/presentation/routes/radio_lesson_route
 import 'package:mothea3_app/modules/radio/presentation/routes/radio_level_lessons_route.dart';
 import 'package:mothea3_app/modules/television/presentation/routes/television_base_levels_route.dart';
 import 'package:mothea3_app/modules/television/presentation/routes/television_fields_route.dart';
+import 'package:mothea3_app/modules/television/presentation/routes/television_instructions_route.dart';
 import 'package:mothea3_app/modules/television/presentation/routes/television_lesson_route.dart';
 import 'package:mothea3_app/modules/television/presentation/routes/television_level_lessons_route.dart';
 import 'package:mothea3_app/modules/television/presentation/routes/television_pre_cond_route.dart';
@@ -74,6 +75,7 @@ class AppRouter {
       TelevisionLessonRoute.route,
       TelevisionRecordingRoute.route,
       TelevisionPreCondRoute.route,
+      TelevisionInstructionsRoute.route,
       TelevisionFieldsRoute.route,
       RadioFieldsRoute.route,
       CulturalBaseLevelsRoute.route,

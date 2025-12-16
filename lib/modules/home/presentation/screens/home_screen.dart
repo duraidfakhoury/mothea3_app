@@ -179,15 +179,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "${LocaleKeys.mothea3.tr()} .",
-                          style: const TextStyle(
-                            color: AppColors.white,
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 2),
+                        SizedBox(height: 1.h),
+                        Image.asset('assets/images/logo.png', height: 8.h),
                         Text(
                           LocaleKeys.theArtOfPublicSpeaking.tr(),
                           style: const TextStyle(

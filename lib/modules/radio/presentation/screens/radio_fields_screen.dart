@@ -16,7 +16,7 @@ class RadioFieldsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: ReturnButton(onTap: () => context.pop(),),
+        leading: ReturnButton(onTap: () => context.pop()),
         centerTitle: true,
         title: Text(
           LocaleKeys.radioSection.tr(),
@@ -163,8 +163,8 @@ class RadioFieldsScreen extends StatelessWidget {
                 ),
                 child: _buildFieldCard(
                   context: context,
-                  title: LocaleKeys.culturalField.tr(),
-                  icon: Icons.palette_rounded,
+                  title: LocaleKeys.sportField.tr(),
+                  icon: Icons.sports_soccer_rounded,
                   gradient: [
                     Colors.orange.withOpacity(0.8),
                     Colors.deepOrange.withOpacity(0.6),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color navy = Color.fromARGB(255, 11, 1, 40);
-  static const Color navyAccent = Color.fromARGB(255, 21, 3, 78);
+  static const Color navyAccent = Color.fromARGB(255, 16, 2, 62);
 
   static const Color black = Color(0xFF000000);
   static const Color blackAccent = Color(0xFF333333);

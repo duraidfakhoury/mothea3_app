@@ -5,6 +5,7 @@ import 'package:mothea3_app/core/constants/app_colors.dart';
 import 'package:mothea3_app/core/enums/app_languages.dart';
 import 'package:mothea3_app/core/theme/bloc/theme_bloc.dart';
 import 'package:mothea3_app/core/utils/app_locale.dart';
+import 'package:mothea3_app/core/services/cache_service.dart';
 import 'package:mothea3_app/generated/locale_keys.g.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -94,6 +95,36 @@ class SettingsScreen extends StatelessWidget {
                         }
                       },
                     ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Card(
+                  color: Colors.red.withOpacity(0.05),
+                  child: ListTile(
+                    title: const Text(
+                      'Reset TV instructions',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    subtitle: Text(
+                      'For debug only: show television instructions again',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.greyAccent,
+                      ),
+                    ),
+                    trailing: const Icon(Icons.refresh, color: Colors.red),
+                    onTap: () async {
+                      await CacheService().resetTelevisionInstructionsSeen();
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Television instructions reset'),
+                          ),
+                        );
+                      }
+                    },
                   ),
                 ),
               ],

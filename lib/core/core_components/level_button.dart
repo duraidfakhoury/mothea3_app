@@ -5,10 +5,9 @@ import 'package:mothea3_app/generated/locale_keys.g.dart';
 
 class LevelButton extends StatefulWidget {
   final dynamic level;
-  final VoidCallback onTap ;
-  
+  final VoidCallback onTap;
 
-  const LevelButton({super.key, required this.level , required this.onTap});
+  const LevelButton({super.key, required this.level, required this.onTap});
 
   @override
   State<LevelButton> createState() => _LevelButtonState();
@@ -19,13 +18,21 @@ class _LevelButtonState extends State<LevelButton> {
 
   IconData _getLevelIcon() {
     final title = widget.level.title.toLowerCase();
-    if (title.contains('beginner') || title.contains('basic') || title.contains('1')) {
+    if (title.contains('beginner') ||
+        title.contains('basic') ||
+        title.contains('1')) {
       return Icons.play_circle_outline;
-    } else if (title.contains('intermediate') || title.contains('medium') || title.contains('2')) {
+    } else if (title.contains('intermediate') ||
+        title.contains('medium') ||
+        title.contains('2')) {
       return Icons.trending_up;
-    } else if (title.contains('advanced') || title.contains('expert') || title.contains('3')) {
+    } else if (title.contains('advanced') ||
+        title.contains('expert') ||
+        title.contains('3')) {
       return Icons.workspace_premium;
-    } else if (title.contains('master') || title.contains('pro') || title.contains('4')) {
+    } else if (title.contains('master') ||
+        title.contains('pro') ||
+        title.contains('4')) {
       return Icons.emoji_events;
     } else if (title.contains('music') || title.contains('song')) {
       return Icons.music_note;
@@ -44,17 +51,15 @@ class _LevelButtonState extends State<LevelButton> {
   }
 
   Color _getLevelColor() {
-    final title = widget.level.title.toLowerCase();
-    if (title.contains('beginner') || title.contains('basic') || title.contains('1')) {
-      return Colors.green;
-    } else if (title.contains('intermediate') || title.contains('medium') || title.contains('2')) {
-      return Colors.blue;
-    } else if (title.contains('advanced') || title.contains('expert') || title.contains('3')) {
-      return Colors.orange;
-    } else if (title.contains('master') || title.contains('pro') || title.contains('4')) {
-      return Colors.purple;
-    }
-    return AppColors.yellow;
+    // You can customize colors per index or type
+    const colors = [
+      Colors.green,
+      Colors.blue,
+      Colors.orange,
+      Colors.purple,
+      AppColors.yellow,
+    ];
+    return colors[widget.level.id % colors.length];
   }
 
   @override
@@ -70,12 +75,11 @@ class _LevelButtonState extends State<LevelButton> {
         onTapDown: isLocked ? null : (_) => setState(() => _isPressed = true),
         onTapUp: isLocked ? null : (_) => setState(() => _isPressed = false),
         onTapCancel: isLocked ? null : () => setState(() => _isPressed = false),
-        onTap: isLocked
-            ? null
-            : widget.onTap,
+        onTap: isLocked ? null : widget.onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 500),
-          transform: Matrix4.identity()..scale(isLocked ? 1.0 : (_isPressed ? 0.95 : 1.0)),
+          transform: Matrix4.identity()
+            ..scale(isLocked ? 1.0 : (_isPressed ? 0.95 : 1.0)),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -86,10 +90,7 @@ class _LevelButtonState extends State<LevelButton> {
               ],
             ),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              width: 2,
-              color: Colors.white.withOpacity(0.1),
-            ),
+            border: Border.all(width: 2, color: Colors.white.withOpacity(0.1)),
             boxShadow: [
               if (!isLocked)
                 BoxShadow(
@@ -123,7 +124,12 @@ class _LevelButtonState extends State<LevelButton> {
                 ),
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      bottom: 20,
+                      left: 20,
+                      right: 20,
+                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -140,14 +146,10 @@ class _LevelButtonState extends State<LevelButton> {
                             ),
                           ),
                           child: Center(
-                            child: Icon(
-                              levelIcon,
-                              color: levelColor,
-                              size: 28,
-                            ),
+                            child: Icon(levelIcon, color: levelColor, size: 28),
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 5),
                         Text(
                           widget.level.title,
                           textAlign: TextAlign.center,
@@ -163,7 +165,10 @@ class _LevelButtonState extends State<LevelButton> {
                         ),
                         const SizedBox(height: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: levelColor.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(12),
@@ -173,7 +178,9 @@ class _LevelButtonState extends State<LevelButton> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                isLocked ? LocaleKeys.Locked.tr() : LocaleKeys.start.tr(),
+                                isLocked
+                                    ? LocaleKeys.Locked.tr()
+                                    : LocaleKeys.start.tr(),
                                 style: TextStyle(
                                   color: levelColor,
                                   fontSize: 12,
@@ -183,11 +190,7 @@ class _LevelButtonState extends State<LevelButton> {
                               ),
                               if (isLocked) ...[
                                 const SizedBox(width: 6),
-                                Icon(
-                                  Icons.lock,
-                                  color: levelColor,
-                                  size: 14,
-                                ),
+                                Icon(Icons.lock, color: levelColor, size: 14),
                               ],
                             ],
                           ),

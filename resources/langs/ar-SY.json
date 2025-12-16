@@ -30,6 +30,7 @@
     "PoliticalField":"المجال السياسي ",
     "economicalField" : "المجال الاقتصادي ",
     "culturalField" : "المجال الثقافي ",
+    "sportField" : "المجال الرياضي ",
     "wedLoveToHearFromYouReachOutForInquiriessupportOrPartnershipOpportunities":"نحن نفضل السماع منك لتلبية متطلباتك , دعمك أو من أجل فرص الشراكة سويا",
     "emailUs":"عبر البريد",
     "ourEmail":"Support@mothea3.com",
@@ -498,5 +499,25 @@
     "whenRegisterYouAcceptPolicy": "عند انشاء محفظة الكترونية انت توافق على سياسة الخصوصية لشركة E-pay",
     "idScanning": "مسح الهوية الوطنية",
     "passportScanning": "مسح جواز السفر",
-    "youHaveThreeLessonsToCompleteThisCourse" : "لديك ثلاث نصوص لإكمالها لتخطي هذا القسم "
+    "youHaveThreeLessonsToCompleteThisCourse" : "لديك ثلاث نصوص لإكمالها لتخطي هذا القسم ",
+    "televisionInstructions": {
+      "title": "التعليمات التلفزيونية",
+      "subtitle": "لتجربة تصوير مثالية التزم بالتعليمات التالية قبل بدء الدرس.",
+      "lessonLabel": "الدرس: {lesson}",
+      "start": "ابدأ الدرس",
+      "items": {
+        "1_title": "الجسم",
+        "1_desc": "ظهر مستقيم، حركة هادئة داخل الكادر.",
+        "2_title": "الوجه والحياد",
+        "2_desc": "تعابير حيادية، ابتسامة حسب نوع المحتوى.",
+        "3_title": "اليدان",
+        "3_desc": "وضع مريح، إيماءات بسيطة غير مبالغ بها.",
+        "4_title": "الصوت والتنفس",
+        "4_desc": "صوت واضح، سرعة متوسطة، تنفس هادئ.",
+        "5_title": "الكاميرا والكادر",
+        "5_desc": "تركيز على العدسة، تموضع صحيح ومتوازن.",
+        "6_title": "المظهر والملابس",
+        "6_desc": "ملابس مهنية هادئة، دون إكسسوارات مشتّتة."
+      }
+    }
 }

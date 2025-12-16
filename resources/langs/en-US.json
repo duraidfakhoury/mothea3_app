@@ -28,6 +28,7 @@
     "PoliticalField":"Political Field",
     "economicalField" : "Economical Field",
     "culturalField" : "Cultural Field",
+    "sportField" : "Sport Field",
     "startRecordingVedio" : "Start Recording Vedio ",
     "recordVedio" : "Record Vedio ",
     "wedLoveToHearFromYouReachOutForInquiriessupportOrPartnershipOpportunities":"We’d love to hear from you! Reach out for inquiries, support, or partnership opportunities.",
@@ -498,5 +499,25 @@
     "whenRegisterYouAcceptPolicy": "By creating an eWallet, you agree to E-pay's privacy policy.",
     "idScanning": "Scan National Id",
     "passportScanning": "Scan Passport",
-    "youHaveThreeLessonsToCompleteThisCourse" : "You Have Three lessons to Complete this Course"
+    "youHaveThreeLessonsToCompleteThisCourse" : "You Have Three lessons to Complete this Course",
+    "televisionInstructions": {
+      "title": "Television guidelines",
+      "subtitle": "For the best filming experience, follow these instructions before starting the lesson.",
+      "lessonLabel": "Lesson: {lesson}",
+      "start": "Start lesson",
+      "items": {
+        "1_title": "Posture",
+        "1_desc": "Straight back, calm movement within the frame.",
+        "2_title": "Face & neutrality",
+        "2_desc": "Neutral expressions; smile depending on content tone.",
+        "3_title": "Hands",
+        "3_desc": "Relaxed placement; simple, non-exaggerated gestures.",
+        "4_title": "Voice & breathing",
+        "4_desc": "Clear voice, medium pace, steady breathing.",
+        "5_title": "Camera & framing",
+        "5_desc": "Look at the lens; correct, balanced positioning.",
+        "6_title": "Appearance & clothing",
+        "6_desc": "Professional, calm attire; avoid distracting accessories."
+      }
+    }
 }

@@ -8,11 +8,13 @@ import 'package:mothea3_app/core/core_components/error_message_box.dart';
 import 'package:mothea3_app/core/core_components/lesson_card.dart';
 import 'package:mothea3_app/core/core_components/return_button.dart';
 import 'package:mothea3_app/core/services/service_locator.dart';
+import 'package:mothea3_app/core/services/cache_service.dart';
 import 'package:mothea3_app/core/utils/base_state.dart';
 import 'package:mothea3_app/generated/locale_keys.g.dart';
 import 'package:mothea3_app/modules/television/domain/entitiy/television_base_level.dart';
 import 'package:mothea3_app/modules/television/domain/entitiy/television_level_lesson.dart';
 import 'package:mothea3_app/modules/television/presentation/blocs/television_level_lessons_bloc/television_level_lessons_bloc.dart';
+import 'package:mothea3_app/modules/television/presentation/routes/television_instructions_route.dart';
 import 'package:mothea3_app/modules/television/presentation/routes/television_lesson_route.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -29,7 +31,7 @@ class TelevisionLevelLessonsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: ReturnButton(onTap: () => context.pop(),),
+        leading: ReturnButton(onTap: () => context.pop()),
         centerTitle: true,
         title: Text(
           level.title,
@@ -138,9 +140,8 @@ class TelevisionLevelLessonsScreen extends StatelessWidget {
                                             Text(
                                               '${lessons.length - 5} ${LocaleKeys.lessonsToCompleteTheLevel.tr()}${LocaleKeys.withh.tr()} 5 ${LocaleKeys.additionalLessons.tr()}',
                                               style: TextStyle(
-                                                color: AppColors.white.withOpacity(
-                                                  0.6,
-                                                ),
+                                                color: AppColors.white
+                                                    .withOpacity(0.6),
                                                 fontSize: 13,
                                               ),
                                             ),
@@ -184,15 +185,11 @@ class TelevisionLevelLessonsScreen extends StatelessWidget {
                                     icon: Icons.tv_outlined,
                                     lesson: lesson,
                                     index: index,
-                                    onTap: () {
-                                      context.push(
-                                        TelevisionLessonRoute.name,
-                                        extra: {
-                                          "levelId": level.id,
-                                          "lesson": lesson,
-                                        },
-                                      );
-                                    },
+                                    onTap: () => _handleLessonTap(
+                                      context,
+                                      level,
+                                      lesson,
+                                    ),
                                   ),
                                 ),
                               );
@@ -235,5 +232,27 @@ class TelevisionLevelLessonsScreen extends StatelessWidget {
     BaseState<List<TelevisionLevelLesson>> state,
   ) {
     // Handle navigation or actions when a lesson is pressed
+  }
+
+  Future<void> _handleLessonTap(
+    BuildContext context,
+    TelevisionBaseLevel level,
+    TelevisionLevelLesson lesson,
+  ) async {
+    final cache = CacheService();
+    final seen = cache.hasTelevisionInstructionsSeen;
+
+    if (!seen) {
+      context.push(
+        TelevisionInstructionsRoute.name,
+        extra: {"levelId": level.id, "lesson": lesson},
+      );
+      return;
+    }
+
+    context.push(
+      TelevisionLessonRoute.name,
+      extra: {"levelId": level.id, "lesson": lesson},
+    );
   }
 }

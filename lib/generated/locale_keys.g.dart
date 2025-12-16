@@ -34,6 +34,7 @@ abstract class  LocaleKeys {
   static const PoliticalField = 'PoliticalField';
   static const economicalField = 'economicalField';
   static const culturalField = 'culturalField';
+  static const sportField = 'sportField';
   static const wedLoveToHearFromYouReachOutForInquiriessupportOrPartnershipOpportunities = 'wedLoveToHearFromYouReachOutForInquiriessupportOrPartnershipOpportunities';
   static const emailUs = 'emailUs';
   static const ourEmail = 'ourEmail';
@@ -503,5 +504,23 @@ abstract class  LocaleKeys {
   static const idScanning = 'idScanning';
   static const passportScanning = 'passportScanning';
   static const youHaveThreeLessonsToCompleteThisCourse = 'youHaveThreeLessonsToCompleteThisCourse';
+  static const televisionInstructions_title = 'televisionInstructions.title';
+  static const televisionInstructions_subtitle = 'televisionInstructions.subtitle';
+  static const televisionInstructions_lessonLabel = 'televisionInstructions.lessonLabel';
+  static const televisionInstructions_start = 'televisionInstructions.start';
+  static const televisionInstructions_items_1_title = 'televisionInstructions.items.1_title';
+  static const televisionInstructions_items_1_desc = 'televisionInstructions.items.1_desc';
+  static const televisionInstructions_items_2_title = 'televisionInstructions.items.2_title';
+  static const televisionInstructions_items_2_desc = 'televisionInstructions.items.2_desc';
+  static const televisionInstructions_items_3_title = 'televisionInstructions.items.3_title';
+  static const televisionInstructions_items_3_desc = 'televisionInstructions.items.3_desc';
+  static const televisionInstructions_items_4_title = 'televisionInstructions.items.4_title';
+  static const televisionInstructions_items_4_desc = 'televisionInstructions.items.4_desc';
+  static const televisionInstructions_items_5_title = 'televisionInstructions.items.5_title';
+  static const televisionInstructions_items_5_desc = 'televisionInstructions.items.5_desc';
+  static const televisionInstructions_items_6_title = 'televisionInstructions.items.6_title';
+  static const televisionInstructions_items_6_desc = 'televisionInstructions.items.6_desc';
+  static const televisionInstructions_items = 'televisionInstructions.items';
+  static const televisionInstructions = 'televisionInstructions';
 
 }

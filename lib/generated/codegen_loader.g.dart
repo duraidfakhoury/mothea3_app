@@ -46,6 +46,7 @@ class CodegenLoader extends AssetLoader{
   "PoliticalField": "المجال السياسي ",
   "economicalField": "المجال الاقتصادي ",
   "culturalField": "المجال الثقافي ",
+  "sportField": "المجال الرياضي ",
   "wedLoveToHearFromYouReachOutForInquiriessupportOrPartnershipOpportunities": "نحن نفضل السماع منك لتلبية متطلباتك , دعمك أو من أجل فرص الشراكة سويا",
   "emailUs": "عبر البريد",
   "ourEmail": "Support@mothea3.com",
@@ -514,7 +515,27 @@ class CodegenLoader extends AssetLoader{
   "whenRegisterYouAcceptPolicy": "عند انشاء محفظة الكترونية انت توافق على سياسة الخصوصية لشركة E-pay",
   "idScanning": "مسح الهوية الوطنية",
   "passportScanning": "مسح جواز السفر",
-  "youHaveThreeLessonsToCompleteThisCourse": "لديك ثلاث نصوص لإكمالها لتخطي هذا القسم "
+  "youHaveThreeLessonsToCompleteThisCourse": "لديك ثلاث نصوص لإكمالها لتخطي هذا القسم ",
+  "televisionInstructions": {
+    "title": "التعليمات التلفزيونية",
+    "subtitle": "لتجربة تصوير مثالية التزم بالتعليمات التالية قبل بدء الدرس.",
+    "lessonLabel": "الدرس: {lesson}",
+    "start": "ابدأ الدرس",
+    "items": {
+      "1_title": "الجسم",
+      "1_desc": "ظهر مستقيم، حركة هادئة داخل الكادر.",
+      "2_title": "الوجه والحياد",
+      "2_desc": "تعابير حيادية، ابتسامة حسب نوع المحتوى.",
+      "3_title": "اليدان",
+      "3_desc": "وضع مريح، إيماءات بسيطة غير مبالغ بها.",
+      "4_title": "الصوت والتنفس",
+      "4_desc": "صوت واضح، سرعة متوسطة، تنفس هادئ.",
+      "5_title": "الكاميرا والكادر",
+      "5_desc": "تركيز على العدسة، تموضع صحيح ومتوازن.",
+      "6_title": "المظهر والملابس",
+      "6_desc": "ملابس مهنية هادئة، دون إكسسوارات مشتّتة."
+    }
+  }
 };
 static const Map<String,dynamic> _en_US = {
   "mothea3": "Mothea3",
@@ -546,6 +567,7 @@ static const Map<String,dynamic> _en_US = {
   "PoliticalField": "Political Field",
   "economicalField": "Economical Field",
   "culturalField": "Cultural Field",
+  "sportField": "Sport Field",
   "startRecordingVedio": "Start Recording Vedio ",
   "recordVedio": "Record Vedio ",
   "wedLoveToHearFromYouReachOutForInquiriessupportOrPartnershipOpportunities": "We’d love to hear from you! Reach out for inquiries, support, or partnership opportunities.",
@@ -1016,7 +1038,27 @@ static const Map<String,dynamic> _en_US = {
   "whenRegisterYouAcceptPolicy": "By creating an eWallet, you agree to E-pay's privacy policy.",
   "idScanning": "Scan National Id",
   "passportScanning": "Scan Passport",
-  "youHaveThreeLessonsToCompleteThisCourse": "You Have Three lessons to Complete this Course"
+  "youHaveThreeLessonsToCompleteThisCourse": "You Have Three lessons to Complete this Course",
+  "televisionInstructions": {
+    "title": "Television guidelines",
+    "subtitle": "For the best filming experience, follow these instructions before starting the lesson.",
+    "lessonLabel": "Lesson: {lesson}",
+    "start": "Start lesson",
+    "items": {
+      "1_title": "Posture",
+      "1_desc": "Straight back, calm movement within the frame.",
+      "2_title": "Face & neutrality",
+      "2_desc": "Neutral expressions; smile depending on content tone.",
+      "3_title": "Hands",
+      "3_desc": "Relaxed placement; simple, non-exaggerated gestures.",
+      "4_title": "Voice & breathing",
+      "4_desc": "Clear voice, medium pace, steady breathing.",
+      "5_title": "Camera & framing",
+      "5_desc": "Look at the lens; correct, balanced positioning.",
+      "6_title": "Appearance & clothing",
+      "6_desc": "Professional, calm attire; avoid distracting accessories."
+    }
+  }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar_SY": _ar_SY, "en_US": _en_US};
 }
