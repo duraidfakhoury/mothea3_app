@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:mothea3_app/modules/auth/domain/entity/user.dart';
 

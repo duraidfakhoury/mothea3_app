@@ -7,7 +7,6 @@ import 'package:mothea3_app/core/core_components/app_button.dart';
 import 'package:mothea3_app/core/core_components/app_text_form_field.dart';
 import 'package:mothea3_app/core/core_components/return_button.dart';
 import 'package:mothea3_app/core/core_components/show_snack_bar.dart';
-import 'package:mothea3_app/core/enums/auth_status.dart';
 import 'package:mothea3_app/core/services/service_locator.dart';
 import 'package:mothea3_app/core/utils/app_validator.dart';
 import 'package:mothea3_app/core/utils/base_state.dart';
