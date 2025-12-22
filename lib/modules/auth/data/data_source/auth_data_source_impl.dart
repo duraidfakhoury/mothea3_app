@@ -1,25 +1,46 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:mothea3_app/core/enums/auth_status.dart';
+import 'package:mothea3_app/core/constants/api_urls.dart';
+import 'package:mothea3_app/core/network/network_helper.dart';
+import 'package:mothea3_app/core/services/cache_service.dart';
 // import 'package:mothea3_app/core/network/network_helper.dart';
 import 'package:mothea3_app/modules/auth/data/data_source/auth_data_source.dart';
 import 'package:mothea3_app/modules/auth/data/model/profile_model.dart';
+import 'package:mothea3_app/modules/auth/data/model/login_response_model.dart';
+import 'package:mothea3_app/modules/auth/data/model/register_response_model.dart';
 import 'package:mothea3_app/modules/auth/domain/parameters/login_parameters.dart';
 import 'package:mothea3_app/modules/auth/domain/parameters/register_parameters.dart';
 
 class AuthDataSourceImpl extends AuthDataSource {
   @override
-  Future<AuthStatus> login(LoginParameters parameters) async {
-    // NetworkResponse response = await NetworkHelper().post(
-    //   ""
-    // );
-    return AuthStatus.authenticated;
+  Future<LoginResponseModel> login(LoginParameters parameters) async {
+    NetworkResponse response = await NetworkHelper().post(
+      ApisUrls().login,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      data: parameters.toJson(),
+    );
+    await CacheService().setToken(response.data['token']);
+    final loginResponse = LoginResponseModel.fromJson(response.data);
+    return (loginResponse);
   }
 
   @override
-  Future<AuthStatus> register(RegisterParameters parameters) async {
-    return AuthStatus.authenticated;
+  Future<RegisterResponseModel> register(RegisterParameters parameters) async {
+    NetworkResponse response = await NetworkHelper().post(
+      ApisUrls().register,
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      data: parameters.toJson(),
+    );
+    await CacheService().setToken(response.data['token']);
+    final ragisterResponse = RegisterResponseModel.fromJson(response.data);
+    return (ragisterResponse);
   }
 
   @override

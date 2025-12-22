@@ -1,12 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mothea3_app/core/constants/app_colors.dart';
 import 'package:mothea3_app/core/enums/app_languages.dart';
 import 'package:mothea3_app/core/theme/bloc/theme_bloc.dart';
 import 'package:mothea3_app/core/utils/app_locale.dart';
 import 'package:mothea3_app/core/services/cache_service.dart';
 import 'package:mothea3_app/generated/locale_keys.g.dart';
+import 'package:mothea3_app/modules/auth/presentation/routes/login_route.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -123,6 +125,33 @@ class SettingsScreen extends StatelessWidget {
                             content: Text('Television instructions reset'),
                           ),
                         );
+                      }
+                    },
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Card(
+                  color: Colors.red.withOpacity(0.05),
+                  child: ListTile(
+                    title: Text(
+                      LocaleKeys.logout.tr(),
+                      style: const TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    subtitle: Text(
+                      'Sign out of your account',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.greyAccent,
+                      ),
+                    ),
+                    trailing: const Icon(Icons.logout, color: Colors.red),
+                    onTap: () async {
+                      await CacheService().removeToken();
+                      await CacheService().removeRefreshToken();
+                      if (context.mounted) {
+                        context.go(LoginRoute.name);
                       }
                     },
                   ),

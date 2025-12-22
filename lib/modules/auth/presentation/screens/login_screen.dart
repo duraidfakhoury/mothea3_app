@@ -6,11 +6,11 @@ import 'package:logger/logger.dart';
 import 'package:mothea3_app/core/core_components/app_button.dart';
 import 'package:mothea3_app/core/core_components/app_text_form_field.dart';
 import 'package:mothea3_app/core/core_components/show_snack_bar.dart';
-import 'package:mothea3_app/core/enums/auth_status.dart';
 import 'package:mothea3_app/core/services/service_locator.dart';
 import 'package:mothea3_app/core/utils/app_validator.dart';
 import 'package:mothea3_app/core/utils/base_state.dart';
 import 'package:mothea3_app/generated/locale_keys.g.dart';
+import 'package:mothea3_app/modules/auth/domain/entity/login_response.dart';
 import 'package:mothea3_app/modules/auth/presentation/blocs/login_bloc/login_bloc.dart';
 import 'package:mothea3_app/modules/auth/presentation/routes/register_route.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/home_route.dart';
@@ -24,14 +24,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final emailFormKey = GlobalKey<FormState>();
   final passwordFormKey = GlobalKey<FormState>();
 
-
-    @override
+  @override
   void dispose() {
     passwordController.dispose();
     emailController.dispose();
@@ -41,8 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context)=> sl<LoginBloc>(),
-      child: BlocConsumer<LoginBloc , BaseState<AuthStatus>>(
+      create: (context) => sl<LoginBloc>(),
+      child: BlocConsumer<LoginBloc, BaseState<LoginResponse>>(
         listener: _loginListener,
         builder: (context, state) {
           return Scaffold(
@@ -52,13 +50,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 100.h,
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 7.w),
+                    padding: EdgeInsets.symmetric(horizontal: 7.w),
                     child: Column(
                       children: [
-                        SizedBox(height: 17.h,),
-                        Text(LocaleKeys.welcome.tr()
-                        ,style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize:24 ),),
-                        SizedBox(height: 10.h,),
+                        SizedBox(height: 17.h),
+                        Text(
+                          LocaleKeys.welcome.tr(),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.headlineLarge?.copyWith(fontSize: 24),
+                        ),
+                        SizedBox(height: 10.h),
                         AppTextFormField(
                           label: LocaleKeys.userName.tr(),
                           hint: LocaleKeys.enterYourUserName.tr(),
@@ -66,8 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           validator: AppValidator().freeNameValidator,
                           formKey: emailFormKey,
                           controller: emailController,
-                          ),
-                        SizedBox(height: 2.h,),
+                        ),
+                        SizedBox(height: 2.h),
                         AppTextFormField(
                           label: LocaleKeys.password.tr(),
                           hint: LocaleKeys.enterPassword.tr(),
@@ -76,15 +78,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           formKey: passwordFormKey,
                           controller: passwordController,
                           isPass: true,
-                          ),
-                        SizedBox(height: 10.h,),
-                        AppButton(label: LocaleKeys.login.tr(context: context), onTap:()=>_loginPressed(context,state) ),
-                        SizedBox(height: 2.h,),
+                        ),
+                        SizedBox(height: 10.h),
+                        AppButton(
+                          label: LocaleKeys.login.tr(context: context),
+                          onTap: () => _loginPressed(context, state),
+                          isLoading: state.isLoading,
+                        ),
+                        SizedBox(height: 2.h),
                         Text(LocaleKeys.doNotHaveAnAccount.tr()),
-                        SizedBox(height: 2.h,),
-                        AppButton(appButtonType: AppButtonType.unFilled, label: LocaleKeys.register.tr(), onTap: (){
-                          context.go(RegisterRoute.name);
-                        })
+                        SizedBox(height: 2.h),
+                        AppButton(
+                          appButtonType: AppButtonType.unFilled,
+                          label: LocaleKeys.register.tr(),
+                          onTap: () {
+                            context.go(RegisterRoute.name);
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -93,43 +103,38 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           );
         },
-        ),
-      );
+      ),
+    );
   }
-    bool _checkInvalid(BaseState<void> state) {
+
+  bool _checkInvalid(BaseState<void> state) {
     return !AppValidator().checkValidateFormsKeys(
-      forms: [
-        emailFormKey,
-        passwordFormKey,
-      ],
+      forms: [emailFormKey, passwordFormKey],
       successCases: [!state.isLoading],
     );
   }
 
-    void _loginPressed(BuildContext context, BaseState<AuthStatus> state) {
+  void _loginPressed(BuildContext context, BaseState<LoginResponse> state) {
     if (_checkInvalid(state)) return;
     context.read<LoginBloc>().add(
-          LoginTapped(
-            password: passwordController.text,
-            email: emailController.text,
-          ),
-        );
+      LoginTapped(
+        password: passwordController.text,
+        email: emailController.text,
+      ),
+    );
   }
 
-
-    void _loginListener(BuildContext context, BaseState<AuthStatus> state) {
-    if (state.isError || state.data! == AuthStatus.unAuthenticated) {
+  void _loginListener(BuildContext context, BaseState<LoginResponse> state) {
+    if (state.isError) {
       showSnackBar(context, failure: state.failure, checkFailureType: false);
       return;
     }
     Logger().d(state.data ?? 'null');
 
-    if (state.isSuccess && state.data! == AuthStatus.authenticated) {
+    if (state.isSuccess && state.data != null) {
       context.go(HomeRoute.name);
-      showSnackBar(context,
-          successMessage: "Welcome Back");
+      showSnackBar(context, successMessage: "Welcome Back");
       return;
     }
-    
   }
 }

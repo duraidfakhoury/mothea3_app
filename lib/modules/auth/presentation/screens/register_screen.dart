@@ -12,6 +12,7 @@ import 'package:mothea3_app/core/services/service_locator.dart';
 import 'package:mothea3_app/core/utils/app_validator.dart';
 import 'package:mothea3_app/core/utils/base_state.dart';
 import 'package:mothea3_app/generated/locale_keys.g.dart';
+import 'package:mothea3_app/modules/auth/domain/entity/register_response.dart';
 import 'package:mothea3_app/modules/auth/presentation/blocs/register_bloc/register_bloc.dart';
 import 'package:mothea3_app/modules/auth/presentation/routes/login_route.dart';
 import 'package:mothea3_app/modules/home/presentation/routes/home_route.dart';
@@ -44,7 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<RegisterBloc>(),
-      child: BlocConsumer<RegisterBloc, BaseState<AuthStatus>>(
+      child: BlocConsumer<RegisterBloc, BaseState<RegisterResponse>>(
         listener: _registerListener,
         builder: (context, state) {
           return Scaffold(
@@ -63,7 +64,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       children: [
                         Row(
                           children: [
-                            ReturnButton(onTap: () => context.go(LoginRoute.name),),
+                            ReturnButton(
+                              onTap: () => context.go(LoginRoute.name),
+                            ),
                             Text(
                               LocaleKeys.registerYourAccountWithMothea3.tr(),
                               style: Theme.of(
@@ -135,6 +138,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         SizedBox(height: 1.h),
                         AppButton(
+                          isLoading: state.isLoading,
+
                           label: LocaleKeys.register.tr(),
                           onTap: () => _registerPressed(context, state),
                         ),
@@ -164,24 +169,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void _registerPressed(BuildContext context, BaseState<AuthStatus> state) {
+  void _registerPressed(
+    BuildContext context,
+    BaseState<RegisterResponse> state,
+  ) {
     if (_checkInvalid(state)) return;
-    // context.read<RegisterBloc>().add(
-    //       RegisterTappedEvent(
-    //         password: passwordController.text,
-    //         email: emailController.text,
-    //       ),
-    //     );
+    context.read<RegisterBloc>().add(
+      RegisterTappedEvent(
+        password: passwordController.text,
+        email: emailController.text,
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        userName: userNameController.text,
+      ),
+    );
   }
 
-  void _registerListener(BuildContext context, BaseState<AuthStatus> state) {
-    if (state.isError || state.data! == AuthStatus.unAuthenticated) {
+  void _registerListener(
+    BuildContext context,
+    BaseState<RegisterResponse> state,
+  ) {
+    if (state.isError) {
       showSnackBar(context, failure: state.failure, checkFailureType: false);
       return;
     }
     Logger().d(state.data ?? 'null');
 
-    if (state.isSuccess && state.data! == AuthStatus.authenticated) {
+    if (state.isSuccess && state.data != null) {
       context.go(HomeRoute.name);
       showSnackBar(context, successMessage: "Welcome Back");
       return;
